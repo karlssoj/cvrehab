@@ -1,0 +1,60 @@
+body {
+    width: 100%;
+    background-color: black;
+    height: 100%;
+}
+
+#switchShoulders {
+    text-align: center;
+    
+}
+
+/* Remember to check bootstrap default 
+container styling before editing values */
+.content {
+    height: 100%;
+}
+.content .text-content{
+    padding-top:10px;
+    padding-bottom: 100px;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    height: auto;
+  
+}
+
+#connectionStatus {
+    text-align: center;
+}
+
+.img_guide {
+    width: 300px;
+}
+
+.video_container {
+    position: relative;
+    width: 100%; 
+    max-width: 800px; 
+    margin: 0 auto; 
+}
+/* Overriding bootstrap's default styling */
+@media (min-width: 600px) {
+    body .container {
+      max-width: 70%;
+    }
+
+
+  }
+
+@media (max-width: 600px) {
+body .container {
+    max-width: 100%;
+    }
+
+}
+

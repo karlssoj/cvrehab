@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="/socket.io/socket.io.js"
+      type="application/javascript"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CV Rehab</title>
+  </head>
+  <body class="bg-light bg-gradient">
+    <div class="container bg-white">
+      <div class="content">
+        <div class="text-content">
+          <div class="jumbotron">
+            <h1 class="display-4">Shoulder range of motion (ROM) measurement tool</h1>
+            <p class="lead">Measure shoulder rotation using Computer Vision.</p>
+            <hr class="my-4" />
+
+            <p>
+              <strong
+                >This website requires access to the user's camera.</strong
+              ><br> 
+            </p>
+
+            <p></p>
+            <div class="accordion" id="instructions">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="instructionsHeader">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseInstructions"
+                    aria-expanded="true"
+                    aria-controls="collapseInstructions"
+                  >
+                    Instructions
+                  </button>
+                </h2>
+                <div
+                  id="collapseInstructions"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="instructionsHeader"
+                  data-bs-parent="#instructions"
+                >
+                <div class="accordion-body">
+                  <h2 class="card-title">User guide</h2>
+                  <p class="card-text">
+                    Using computer vision technology, this application is designed for measuring shoulder range of motion and rotation using your camera. This user guide instructs you on how to use this application. <br>
+                    <strong>For optimal results, use this tool in a well lit area.</strong>
+                  </p>
+                  <h4 class="card-title">Choose side</h4>
+                  <p class="card-text">
+                    To get started, choose below the instructions either the
+                    <b>left button</b> to measure the left shoulder, or
+                    <b>right button</b> to measure the right shoulder. Your browser will request permission to use your camera, and granting access is necessary for using this application. A video stream will appear shortly displaying the measurements.
+                  </p>
+
+                  <div class="container-fluid-mx-0">
+                    
+                    <div class="row">
+                      <div class="col">
+                        <h4 class="card-title">
+                          Measuring flexion or extension
+                        </h4>
+                      </div>
+                      <div class="col">
+                        <h4 class="card-title">
+                          Measuring abduction or adduction
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        Position yourself in the center of the video feed.<br />
+                        <strong>
+                          Face left/right side towards the camera</strong
+                        >.
+                      </div>
+                      <div class="col">
+                        Position yourself in the center of the video feed.<br />
+                        <strong>Face towards the camera</strong>.
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <img
+                          class="img-fluid img_guide"
+                          src="./media/extension.png"
+                          alt="Image of flexion and extension"
+                        />
+                      </div>
+                      <div class="col">
+                        <img
+                          class="img-fluid img_guide"
+                          src="./media/abduction.png"
+                          alt="Image of abduction and adduction"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <br />
+                  <h4 class="card-title">Spoken countdown</h4>
+
+                  <p class="card-text">A spoken countdown from ten (10) will signal the start of the measurement. 
+                    
+                    The results will be read out loud at the end of the countdown.
+                  </p>
+                  <p class="card-text">
+                    The measurement process can be restarted by choosing a side again.
+                  </p>
+                </div>
+
+                <br />
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4" />
+
+          <div id="switchShoulders">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary ">
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id="left"
+                  autocomplete="off"
+                  onclick="start(this.id); changeButton(this.id)"
+                />
+                Left
+              </label>
+              <label class="btn btn-primary ">
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="options"
+                  id="right"
+                  autocomplete="off"
+                  onclick="start(this.id); changeButton(this.id)"
+                />
+                Right
+              </label>
+            </div>
+          </div>
+
+          <br />
+          <div id="connectionStatus">
+            <div id="spinner"></div>
+            <div id="statusText"></div>
+          </div>
+        </div>
+        <div class="video_container">
+          <video id="remoteVideo" autoplay playsinline></video>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./script.js" type="application/javascript"></script>
+</html>

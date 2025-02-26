@@ -1,0 +1,5 @@
+.venv
+Measurements.txt
+.env
+app.log
+__pychache__/
