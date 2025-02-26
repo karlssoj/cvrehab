@@ -12,3 +12,9 @@ To run the program, backend and frontend need to be run separately.
 In the Backend folder, run `python main.py`
 ### Frontend
 In the Frontend folder, run `node server.js`
+
+
+# CV-Rehab stand alone (local python app)
+1. Install opencv and ultralytics
+
+2. Run with Python
