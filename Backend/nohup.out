@@ -71,3 +71,4 @@ Traceback (most recent call last):
 ssl.SSLError: [SSL] PEM lib (_ssl.c:3917)
 INFO:     Stopping reloader process [1888556]
 INFO:     Stopping reloader process [1887618]
+./startservercommand: 1: uvicorn: not found

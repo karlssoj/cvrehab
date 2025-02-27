@@ -75,7 +75,8 @@ function addEventListeners() {
     console.log("Connectionstatechange:", pc.connectionState);
     if (pc.connectionState === "connected") {
       console.log("peers connected!");
-      connectionOutput("connected");
+      startCountdown();
+	connectionOutput("connected");
       enableButtons();
     }
   });
@@ -316,7 +317,6 @@ async function startCountdown() {
   // countdown value
   let count = 10;
   
-	console.log("TÄNNE VITTU?");
 
   await speaking("Starting measurement in the count of " + count);
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -334,6 +334,37 @@ async function startCountdown() {
   const interval = setInterval(intervalCount, 2000);
 
 }
+
+/*async function startCountdown() {
+  let count = 10;
+  
+  console.log("🎤 Starting countdown...");
+
+  // Start the countdown announcement
+  await speaking("Starting measurement in the count of " + count);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  // Recursive function to properly wait for speaking() before decrementing
+  async function countDownStep() {
+    if (count === 0) {
+      console.log("📏 Starting measurement!");
+      await measuring();
+      return;
+    }
+
+    console.log(`🗣 Speaking: ${count}`);
+    await speaking(count.toString()); // Convert number to string for speech
+    count--;
+
+    // Wait before calling next number
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    countDownStep(); // Recursively call itself
+  }
+
+  countDownStep(); // Start the countdown process
+}*/
+
 
 /* Functions for HTML/UI */
 
