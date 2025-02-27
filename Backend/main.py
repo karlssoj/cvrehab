@@ -167,4 +167,4 @@ async def disconnect(sid):
 
 
 if __name__ == "__main__":
-    uvicorn.run(socket_app, host='86.50.253.84', port=5000, log_level="debug")
+    uvicorn.run(socket_app, host='86.50.253.84', port=5555, log_level="debug")

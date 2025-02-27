@@ -1,4 +1,4 @@
-const socket = io("https://86.50.253.84:5000/");
+const socket = io("wss://86.50.253.84:5555/");
 
 /* peerconnection variables */
 let pc = null;
@@ -20,17 +20,37 @@ socket.on("connect", function () {
 
 /*  WEBRTC  */
 
-async function createPeerConnection() {
+//async function createPeerConnection() {
   // create a peer connection
-  var configuration = {
-    //iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }],
-    iceServers: [{ urls: ["stun.callwithus.com:3478"] }],
-  };
+//  var configuration = {
+//    //iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }],
+//    iceServers: [{ urls: ["stun:stun.callwithus.com:3478"] }],
+//  };
+//  pc = new RTCPeerConnection(configuration);
+//
+//  addEventListeners();
+//  return pc;
+//}
+
+
+async function createPeerConnection() {
+	var configuration = {
+    		iceServers: [
+        		{ urls: ["stun:stun.l.google.com:19302"] },
+        		{
+            			urls: "turn:192.158.29.39:3478?transport=udp",
+            			username: "28224511:1379330808",
+            			credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA="
+        		}
+    	]
+	};
+
   pc = new RTCPeerConnection(configuration);
 
   addEventListeners();
   return pc;
 }
+
 
 function addEventListeners() {
   pc.addEventListener("track", function (event) {
@@ -171,14 +191,44 @@ function createOffer() {
   }
 }
 
-function displayStream(event) {
+//function displayStream(event) {
   /**
    * Displays track stream
    */
-  var remoteVideo = document.getElementById("remoteVideo");
-  remoteVideo.srcObject = event.streams[0];
-  startCountdown();
+//  var remoteVideo = document.getElementById("remoteVideo");
+//  remoteVideo.srcObject = event.streams[0];
+//  startCountdown();
+//}
+
+
+
+function displayStream(event) {
+    var remoteVideo = document.getElementById("remoteVideo");
+
+    if (!remoteVideo) {
+        console.error("🚨 Error: <video> element not found in DOM!");
+        return;
+    }
+
+    if (!event.streams.length || event.streams[0].getVideoTracks().length === 0) {
+        console.error("🚨 No video tracks received in stream!");
+        return;
+    }
+
+    console.log("✅ Assigning remote stream to video element.");
+    remoteVideo.srcObject = event.streams[0];
+
+    remoteVideo.onloadedmetadata = () => {
+        console.log("🎥 Video metadata loaded, attempting playback...");
+        remoteVideo.play().catch((error) => {
+            console.error("🚨 Error playing video:", error);
+        });
+    };
 }
+
+
+
+
 async function replaceTrack(newTrack) {
   /**
    * Function that replaces previous tracks with current

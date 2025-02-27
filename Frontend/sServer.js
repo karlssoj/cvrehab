@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { createServer } from "node:https";
 
 const app = express();
-const port = 3000;
+const port = 3333;
 
 // Load SSL certificate and private key
 const options = {
