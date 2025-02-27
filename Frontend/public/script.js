@@ -20,36 +20,28 @@ socket.on("connect", function () {
 
 /*  WEBRTC  */
 
-//async function createPeerConnection() {
-  // create a peer connection
-//  var configuration = {
-//    //iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }],
-//    iceServers: [{ urls: ["stun:stun.callwithus.com:3478"] }],
-//  };
-//  pc = new RTCPeerConnection(configuration);
-//
-//  addEventListeners();
-//  return pc;
-//}
-
-
 async function createPeerConnection() {
-	var configuration = {
-    		iceServers: [
-        		{ urls: ["stun:stun.l.google.com:19302"] },
-        		{
-            			urls: "turn:192.158.29.39:3478?transport=udp",
-            			username: "28224511:1379330808",
-            			credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA="
-        		}
-    	]
-	};
+  // create a peer connection
+
+var configuration = {
+    iceServers: [
+        { urls: ["stun:86.50.253.84:3478"] },  // STUN
+        {
+            urls: "turn:86.50.253.84:3478",    // TURN
+            username: "rehabbi",                      // Any username
+            credential: "CVRehabTurn25"
+        }
+    ],
+    iceTransportPolicy: "relay" // Force relay mode if needed
+};
 
   pc = new RTCPeerConnection(configuration);
 
   addEventListeners();
   return pc;
 }
+
+
 
 
 function addEventListeners() {
@@ -324,6 +316,8 @@ async function startCountdown() {
   // countdown value
   let count = 10;
   
+	console.log("TÄNNE VITTU?");
+
   await speaking("Starting measurement in the count of " + count);
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
