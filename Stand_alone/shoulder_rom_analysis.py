@@ -3,7 +3,7 @@ import cv2
 import math
 import datetime
 
-model = YOLO('yolov8n-pose.pt')  # load an official model
+model = YOLO('yolo11n-pose.pt')  # load an official model
 
 cap = cv2.VideoCapture(0)
 
@@ -155,6 +155,11 @@ while cap.isOpened():
         right_wrist = keypoints[0][10]
         left_hip = keypoints[0][11]
         right_hip = keypoints[0][12]
+
+        left_knee = keypoints[0][13]
+        right_knee = keypoints[0][14]
+        left_ankle = keypoints[0][15]
+        right_ankle = keypoints[0][16]
 
         angle = 0
         
